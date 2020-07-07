@@ -6,7 +6,7 @@ import Shop from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 // So that our App knows who is authorized
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 class App extends Component {
     constructor(props) {
@@ -19,11 +19,12 @@ class App extends Component {
 
     // We will use this for logging out user
     unsubscribeFromAuth = null;
+
     // Firebase allows us to easily get the logged in user
     componentDidMount() {
-        this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+        this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+            createUserProfileDocument(user);
             this.setState({ currentUser: user });
-            console.log(user);
         });
     }
 
