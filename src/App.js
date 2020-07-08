@@ -22,9 +22,23 @@ class App extends Component {
 
     // Firebase allows us to easily get the logged in user
     componentDidMount() {
-        this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-            createUserProfileDocument(user);
-            this.setState({ currentUser: user });
+        this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+            if (userAuth) {
+                const userRef = await createUserProfileDocument(userAuth);
+
+                // Query to Firebase DB
+                userRef.onSnapshot((snapShot) => {
+                    this.setState({
+                        currentUser: {
+                            id: snapShot.id,
+                            ...snapShot.data(),
+                        },
+                    });
+                    console.log(this.state);
+                });
+            } else {
+                this.setState({ currentUser: userAuth });
+            }
         });
     }
 
