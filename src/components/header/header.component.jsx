@@ -31,6 +31,7 @@ const Header = ({ currentUser }) => (
     </div>
 );
 
+// this state is top level root reducer
 const mapStateToProps = (state) => ({
     currentUser: state.user.currentUser,
 });
