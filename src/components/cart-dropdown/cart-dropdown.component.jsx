@@ -6,8 +6,11 @@ import CartItem from '../cart-item/cart-item.component';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCartItems } from '../../redux/cart/cart.selector';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
-const CartDropdown = ({ cartItems, history }) => {
+// If we don't write second argument to connect, it automatically
+// get passed as prop and we can dispatch action from props
+const CartDropdown = ({ cartItems, history, dispatch }) => {
     return (
         <div className='cart-dropdown'>
             <div className='cart-items'>
@@ -19,7 +22,13 @@ const CartDropdown = ({ cartItems, history }) => {
                     <span className='empty-message'>Your cart is empty</span>
                 )}
             </div>
-            <CustomButton onClick={() => history.push('/checkout')} inverted>
+            <CustomButton
+                onClick={() => {
+                    history.push('/checkout');
+                    dispatch(toggleCartHidden());
+                }}
+                inverted
+            >
                 GO TO CHECKOUT
             </CustomButton>
         </div>
