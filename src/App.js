@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import HomePage from './pages/homepage/homepage.component';
 import { Route, Switch, Redirect } from 'react-router-dom';
+// Pages
+import HomePage from './pages/homepage/homepage.component';
 import Shop from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import Checkout from './pages/checkout/checkout.component';
 // So that our App knows who is authorized
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { connect } from 'react-redux';
@@ -60,6 +62,7 @@ class App extends Component {
                             )
                         }
                     />
+                    <Route exact path='/checkout' component={Checkout} />
                 </Switch>
             </div>
         );
