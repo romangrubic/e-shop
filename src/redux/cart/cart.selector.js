@@ -7,6 +7,13 @@ export const selectCartItems = createSelector(
     (cart) => cart.cartItems
 );
 
+// Selector for hidden property in header component
+export const selectCartHidden = createSelector(
+    [selectCart],
+    (cart) => cart.hidden
+);
+
+// Selector for quantity in cart icon component
 export const selectCartItemsCount = createSelector(
     [selectCartItems],
     (cartItems) =>
