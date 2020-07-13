@@ -3,8 +3,12 @@ import logger from 'redux-logger';
 import rootReducer from './root-reducer';
 import { persistStore } from 'redux-persist';
 
-const middlewares = [logger];
+const middlewares = [];
 
+// We don't want to see logger in production only in development
+if (process.env.NODE_ENV === 'development') {
+    middlewares.push(logger);
+}
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 export const persistor = persistStore(store);
