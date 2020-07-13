@@ -7,6 +7,7 @@ import {
 } from '../../redux/cart/cart.selector';
 import './checkout.styles.scss';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 
 const Checkout = ({ cartItems, total }) => {
     return (
@@ -34,6 +35,11 @@ const Checkout = ({ cartItems, total }) => {
             <div className='total'>
                 <span>Total: €{total} </span>
             </div>
+            <div className='test-warning'>
+                * Please use the following test credit card for payment *
+                <br /> 4242 4242 4242 4242 - EXp: 05/25 - CVV: 123
+            </div>
+            <StripeCheckoutButton className='button' price={total} />
         </div>
     );
 };
