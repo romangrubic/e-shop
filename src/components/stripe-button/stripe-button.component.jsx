@@ -15,7 +15,7 @@ const StripeCheckoutButton = ({ price }) => {
             name="Garak's Clothiers Ltd."
             billingAddress
             shippingAddress
-            image='https://svgshare.com/i/CUz.svg'
+            image='https://s4.aconvert.com/convert/p3r68-cdx67/a2lz7-b8d8l.svg'
             description={`Your total is € ${price}`}
             currency='EUR'
             amount={priceForStripe}
