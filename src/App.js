@@ -8,12 +8,17 @@ import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Checkout from './pages/checkout/checkout.component';
 // So that our App knows who is authorized
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import {
+    auth,
+    createUserProfileDocument,
+    addCollectionsAndDocuments,
+} from './firebase/firebase.utils';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 // Selectors
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
+import { selectCollectionsForPreview } from './redux/shop/shop.selector';
 
 class App extends Component {
     // We will use this for logging out user
@@ -21,7 +26,7 @@ class App extends Component {
 
     // Firebase allows us to easily get the logged in user
     componentDidMount() {
-        const { setCurrentUser } = this.props;
+        const { setCurrentUser, collectionsArray } = this.props;
 
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
             if (userAuth) {
@@ -34,9 +39,12 @@ class App extends Component {
                         ...snapShot.data(),
                     });
                 });
-            } else {
-                setCurrentUser(userAuth);
             }
+            setCurrentUser(userAuth);
+            addCollectionsAndDocuments(
+                'collections',
+                collectionsArray.map(({ title, items }) => ({ title, items }))
+            );
         });
     }
 
@@ -70,6 +78,7 @@ class App extends Component {
 }
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
+    collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({
