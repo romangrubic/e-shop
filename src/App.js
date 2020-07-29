@@ -41,10 +41,10 @@ class App extends Component {
                 });
             }
             setCurrentUser(userAuth);
-            addCollectionsAndDocuments(
-                'collections',
-                collectionsArray.map(({ title, items }) => ({ title, items }))
-            );
+            // addCollectionsAndDocuments(
+            //     'collections',
+            //     collectionsArray.map(({ title, items }) => ({ title, items }))
+            // );
         });
     }
 

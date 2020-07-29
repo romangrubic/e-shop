@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 // Auth for user authorization
 import 'firebase/auth';
+import directoryComponent from '../components/directory/directory.component';
 
 // Configuration for Firebase
 const config = {
@@ -39,20 +40,38 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 };
 
-export const addCollectionsAndDocuments = async (
-    collectionKey,
-    objectsToAdd
-) => {
-    const collectionRef = firestore.collection(collectionKey);
-    console.log(collectionRef);
+// export const addCollectionsAndDocuments = async (
+//     collectionKey,
+//     objectsToAdd
+// ) => {
+//     const collectionRef = firestore.collection(collectionKey);
+//     console.log(collectionRef);
 
-    const batch = firestore.batch();
-    objectsToAdd.forEach((obj) => {
-        const newDocRef = collectionRef.doc();
-        batch.set(newDocRef, obj);
+//     const batch = firestore.batch();
+//     objectsToAdd.forEach((obj) => {
+//         const newDocRef = collectionRef.doc();
+//         batch.set(newDocRef, obj);
+//     });
+
+//     return await batch.commit();
+// };
+
+// Taking collections from Firebase and setting routeName for shop component
+export const convertCollectionsSnapshotToMap = (collectionsSnapshot) => {
+    const transformedCollection = collectionsSnapshot.docs.map((doc) => {
+        const { title, items } = doc.data();
+
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            id: doc.id,
+            title,
+            items,
+        };
     });
-
-    return await batch.commit();
+    return transformedCollection.reduce((accumulator, collection) => {
+        accumulator[collection.title.toLowerCase()] = collection;
+        return accumulator;
+    }, {});
 };
 
 // Initializing Firebase
