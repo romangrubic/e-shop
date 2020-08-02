@@ -26,26 +26,27 @@ class App extends Component {
 
     // Firebase allows us to easily get the logged in user
     componentDidMount() {
-        const { setCurrentUser, collectionsArray } = this.props;
+        const { setCurrentUser } = this.props;
 
-        this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-            if (userAuth) {
-                const userRef = await createUserProfileDocument(userAuth);
+        // Switching to redux-saga
+        //  this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+        //     if (userAuth) {
+        //         const userRef = await createUserProfileDocument(userAuth);
 
-                // Query to Firebase DB
-                userRef.onSnapshot((snapShot) => {
-                    setCurrentUser({
-                        id: snapShot.id,
-                        ...snapShot.data(),
-                    });
-                });
-            }
-            setCurrentUser(userAuth);
-            // addCollectionsAndDocuments(
-            //     'collections',
-            //     collectionsArray.map(({ title, items }) => ({ title, items }))
-            // );
-        });
+        //         // Query to Firebase DB
+        //         userRef.onSnapshot((snapShot) => {
+        //             setCurrentUser({
+        //                 id: snapShot.id,
+        //                 ...snapShot.data(),
+        //             });
+        //         });
+        //     }
+        //     setCurrentUser(userAuth);
+        //     // addCollectionsAndDocuments(
+        //     //     'collections',
+        //     //     collectionsArray.map(({ title, items }) => ({ title, items }))
+        //     // );
+        // });
     }
 
     componentWillUnmount() {
