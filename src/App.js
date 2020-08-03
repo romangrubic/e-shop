@@ -19,35 +19,18 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { selectCollectionsForPreview } from './redux/shop/shop.selector';
+import { checkUserSession } from './redux/user/user.actions';
 
 class App extends Component {
     // We will use this for logging out user
     unsubscribeFromAuth = null;
 
     // Firebase allows us to easily get the logged in user
-    // componentDidMount() {
-    //     // const { setCurrentUser } = this.props;
-
-    //     // Switching to redux-saga
-    //     //  this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-    //     //     if (userAuth) {
-    //     //         const userRef = await createUserProfileDocument(userAuth);
-
-    //     //         // Query to Firebase DB
-    //     //         userRef.onSnapshot((snapShot) => {
-    //     //             setCurrentUser({
-    //     //                 id: snapShot.id,
-    //     //                 ...snapShot.data(),
-    //     //             });
-    //     //         });
-    //     //     }
-    //     //     setCurrentUser(userAuth);
-    //     //     // addCollectionsAndDocuments(
-    //     //     //     'collections',
-    //     //     //     collectionsArray.map(({ title, items }) => ({ title, items }))
-    //     //     // );
-    //     // });
-    // }
+    componentDidMount() {
+        // Persistence effect
+        const { checkUserSession } = this.props;
+        checkUserSession();
+    }
 
     componentWillUnmount() {
         this.unsubscribeFromAuth();
@@ -82,4 +65,8 @@ const mapStateToProps = createStructuredSelector({
     collectionsArray: selectCollectionsForPreview,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+    checkUserSession: () => dispatch(checkUserSession()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
