@@ -1,5 +1,3 @@
-import Shop from '../../pages/shop/shop.component';
-
 const ShopActionTypes = {
     FETCH_COLLECTIONS_START: 'FETCH_COLLECTIONS_START',
     FETCH_COLLECTIONS_SUCCESS: 'FETCH_COLLECTIONS_SUCCESS',

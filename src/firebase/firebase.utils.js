@@ -5,7 +5,6 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 // Auth for user authorization
 import 'firebase/auth';
-import directoryComponent from '../components/directory/directory.component';
 
 // Configuration for Firebase
 const config = {
