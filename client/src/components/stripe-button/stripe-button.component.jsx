@@ -1,21 +1,37 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
 
 const StripeCheckoutButton = ({ price }) => {
     const priceForStripe = price * 100;
     const publishableKey = 'pk_test_cxoYgvKjxdJULhJKETNPLixs00JuNJdJlq';
 
     const onToken = (token) => {
-        console.log(token);
-        alert('Payment successful');
+        axios({
+            url: 'payment',
+            method: 'post',
+            data: {
+                amount: priceForStripe,
+                token,
+            },
+        })
+            .then((response) => {
+                alert('Payment successful');
+            })
+            .catch((error) => {
+                console.log('Payment error: ', JSON.parse(error));
+                alert(
+                    'There was an issue with your payment. Please sure you use the provided credit card'
+                );
+            });
     };
+
     return (
         <StripeCheckout
             label='Pay Now'
             name="Garak's Clothiers Ltd."
             billingAddress
             shippingAddress
-            image='https://s4.aconvert.com/convert/p3r68-cdx67/a2lz7-b8d8l.svg'
             description={`Your total is € ${price}`}
             currency='EUR'
             amount={priceForStripe}
