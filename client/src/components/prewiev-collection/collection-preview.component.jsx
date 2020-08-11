@@ -14,7 +14,11 @@ const CollectionPreview = ({ title, items, history, match, routeName }) => {
             </h1>
             <div className='preview'>
                 {items.slice(0, 4).map((item) => (
-                    <CollectionItem key={item.id} item={item} />
+                    <CollectionItem
+                        key={item.id}
+                        item={item}
+                        category={title}
+                    />
                 ))}
             </div>
         </div>
