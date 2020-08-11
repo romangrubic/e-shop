@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './collection-item-modal.styles.scss';
 import { connect } from 'react-redux';
 import { addItem } from '../../redux/cart/cart.actions';
 
-const CollectionItemModal = ({ open, onClose, item, addItem }) => {
+const CollectionItemModal = ({ open, onClose, item, addItem, category }) => {
     const { name, price, imageUrl } = item;
+
+    const [size, setSize] = useState('Medium');
+
+    // if (category == 'Sneakers') {
+    //     // console.log(category);
+    //     return (sneakers = <button>Sneakers</button>);
+    // } else {
+    //     button = <button></button>;
+    // }
 
     if (!open) return null;
     return (
@@ -20,20 +29,52 @@ const CollectionItemModal = ({ open, onClose, item, addItem }) => {
                 />
                 <h1 className='text-center'>{name}</h1>
                 <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Eum earum, eaque consectetur nemo id placeat vitae. Ipsam
-                    harum nihil, consequatur, totam ea neque veniam, alias enim
-                    sed nostrum consequuntur omnis.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Velit ullam, inventore aut debitis, voluptatum repellat
+                    incidunt nulla ex alias cum dicta odit impedit saepe dolorem
+                    explicabo rem laborum, nobis est.
                 </p>
                 <h2 className='text-center'>{price} €</h2>
-                {/* SIZE CHOICES */}
-                <button className='add-button' onClick={() => addItem(item)}>
+                {/* SIZE CHOICES new component which renders choices based on */}
+                {/* <Choices category={category} size={size} /> */}
+                <div className='center-buttons'>
+                    <button
+                        className='choice-button'
+                        onClick={() => setSize('Small')}
+                    >
+                        S
+                    </button>
+                    <button
+                        className='choice-button'
+                        onClick={() => setSize('Medium')}
+                    >
+                        M
+                    </button>
+                    <button
+                        className='choice-button'
+                        onClick={() => setSize('Large')}
+                    >
+                        L
+                    </button>
+                </div>
+                <button
+                    className='add-button'
+                    onClick={() => addItem({ ...item, size })}
+                >
                     ADD TO CART
                 </button>
             </div>
         </>
     );
 };
+
+// function Choices({ category, size }) {
+//     const [size, setSize] = useState('Medium');
+
+//     if (category === 'Sneakers') {
+//         return <button>Sneakers</button>;
+//     }
+// }
 
 const mapDispatchToProps = (dispatch) => ({
     addItem: (item) => dispatch(addItem(item)),
