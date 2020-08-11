@@ -59,7 +59,10 @@ const CollectionItemModal = ({ open, onClose, item, addItem, category }) => {
                 </div>
                 <button
                     className='add-button'
-                    onClick={() => addItem({ ...item, size })}
+                    onClick={() => {
+                        addItem({ ...item, size });
+                        onClose();
+                    }}
                 >
                     ADD TO CART
                 </button>
