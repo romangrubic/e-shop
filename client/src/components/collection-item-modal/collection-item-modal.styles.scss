@@ -27,6 +27,27 @@
         background-position: center;
         margin-bottom: 5px;
     }
+    .center-buttons {
+        padding: 0px 0px 20px;
+        text-align: center;
+
+        .choice-button {
+            font-size: 16px;
+            width: 40px;
+            height: 35px;
+            background-color: transparent;
+            border: 2px solid rgba(0, 0, 0, 0.459);
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.85);
+                color: white;
+            }
+            &:focus {
+                background-color: rgba(0, 0, 0, 0.85);
+                color: white;
+            }
+        }
+    }
     .close-icon {
         background-color: transparent;
         text-align: right;
