@@ -1,9 +1,9 @@
 import React from 'react';
 import './size-choices.styles.scss';
-import { setSize } from '../../redux/cart/cart.actions';
+import { setSize, enableAddButton } from '../../redux/cart/cart.actions';
 import { connect } from 'react-redux';
 
-const SizeChoices = ({ category, setSize }) => {
+const SizeChoices = ({ category, setSize, enableAddButton }) => {
     let sizeChoices = ['Small', 'Medium', 'Large'];
 
     if (category === 'Sneakers') sizeChoices = [6, 6.5, 7, 7.5, 8, 8.5, 9];
@@ -19,7 +19,10 @@ const SizeChoices = ({ category, setSize }) => {
                 <button
                     key={size}
                     className='choice-button'
-                    onClick={() => setSize(`${size}`)}
+                    onClick={() => {
+                        setSize(`${size}`);
+                        enableAddButton();
+                    }}
                 >
                     {size}
                 </button>
@@ -30,6 +33,7 @@ const SizeChoices = ({ category, setSize }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     setSize: (size) => dispatch(setSize(size)),
+    enableAddButton: () => dispatch(enableAddButton()),
 });
 
 export default connect(null, mapDispatchToProps)(SizeChoices);

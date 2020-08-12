@@ -1,10 +1,10 @@
 import React from 'react';
 import './collection-item-modal.styles.scss';
 import { connect } from 'react-redux';
-import { addItem } from '../../redux/cart/cart.actions';
+import { addItem, disableAddButton } from '../../redux/cart/cart.actions';
 import SizeChoices from '../size-choices/size-choices.component';
 import { createStructuredSelector } from 'reselect';
-import { selectSize } from '../../redux/cart/cart.selector';
+import { selectSize, selectIsDisabled } from '../../redux/cart/cart.selector';
 
 const CollectionItemModal = ({
     open,
@@ -13,10 +13,10 @@ const CollectionItemModal = ({
     addItem,
     category,
     size,
-    // setSize,
+    isDisabled,
+    disableAddButton,
 }) => {
     const { name, price, imageUrl } = item;
-
     if (!open) return null;
     return (
         <>
@@ -39,10 +39,12 @@ const CollectionItemModal = ({
                 <h2 className='text-center'>{price} €</h2>
                 <SizeChoices category={category} />
                 <button
+                    disabled={isDisabled}
                     className='add-button'
                     onClick={() => {
                         addItem({ ...item, size });
                         onClose();
+                        disableAddButton();
                     }}
                 >
                     ADD TO CART
@@ -54,11 +56,12 @@ const CollectionItemModal = ({
 
 const mapStateToProps = createStructuredSelector({
     size: selectSize,
+    isDisabled: selectIsDisabled,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     addItem: (item) => dispatch(addItem(item)),
-    // setSize: (size) => dispatch(setSize(size)),
+    disableAddButton: () => dispatch(disableAddButton()),
 });
 
 export default connect(
