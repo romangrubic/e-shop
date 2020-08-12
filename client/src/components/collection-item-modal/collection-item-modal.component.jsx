@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './collection-item-modal.styles.scss';
 import { connect } from 'react-redux';
 import { addItem } from '../../redux/cart/cart.actions';
+import SizeChoices from '../size-choices/size-choices.component';
+import { createStructuredSelector } from 'reselect';
+import { selectSize } from '../../redux/cart/cart.selector';
 
-const CollectionItemModal = ({ open, onClose, item, addItem, category }) => {
+const CollectionItemModal = ({
+    open,
+    onClose,
+    item,
+    addItem,
+    category,
+    size,
+    // setSize,
+}) => {
     const { name, price, imageUrl } = item;
-
-    const [size, setSize] = useState('Medium');
-
-    // if (category == 'Sneakers') {
-    //     // console.log(category);
-    //     return (sneakers = <button>Sneakers</button>);
-    // } else {
-    //     button = <button></button>;
-    // }
 
     if (!open) return null;
     return (
@@ -35,28 +37,7 @@ const CollectionItemModal = ({ open, onClose, item, addItem, category }) => {
                     explicabo rem laborum, nobis est.
                 </p>
                 <h2 className='text-center'>{price} €</h2>
-                {/* SIZE CHOICES new component which renders choices based on */}
-                {/* <Choices category={category} size={size} /> */}
-                <div className='center-buttons'>
-                    <button
-                        className='choice-button'
-                        onClick={() => setSize('Small')}
-                    >
-                        S
-                    </button>
-                    <button
-                        className='choice-button'
-                        onClick={() => setSize('Medium')}
-                    >
-                        M
-                    </button>
-                    <button
-                        className='choice-button'
-                        onClick={() => setSize('Large')}
-                    >
-                        L
-                    </button>
-                </div>
+                <SizeChoices category={category} />
                 <button
                     className='add-button'
                     onClick={() => {
@@ -71,16 +52,16 @@ const CollectionItemModal = ({ open, onClose, item, addItem, category }) => {
     );
 };
 
-// function Choices({ category, size }) {
-//     const [size, setSize] = useState('Medium');
-
-//     if (category === 'Sneakers') {
-//         return <button>Sneakers</button>;
-//     }
-// }
+const mapStateToProps = createStructuredSelector({
+    size: selectSize,
+});
 
 const mapDispatchToProps = (dispatch) => ({
     addItem: (item) => dispatch(addItem(item)),
+    // setSize: (size) => dispatch(setSize(size)),
 });
 
-export default connect(null, mapDispatchToProps)(CollectionItemModal);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CollectionItemModal);
