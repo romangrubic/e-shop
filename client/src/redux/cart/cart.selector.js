@@ -32,3 +32,6 @@ export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
         0
     )
 );
+
+// Selector for size choices
+export const selectSize = createSelector([selectCart], (cart) => cart.size);
