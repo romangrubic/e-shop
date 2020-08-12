@@ -4,6 +4,7 @@ import { addItemToCart, removeItemToCart } from './cart.utils';
 const INITIAL_STATE = {
     hidden: true,
     cartItems: [],
+    size: 'No size selected',
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -37,6 +38,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 cartItems: [],
+            };
+        case CartActionTypes.SELECT_SIZE:
+            return {
+                ...state,
+                size: action.payload,
             };
         default:
             return state;
