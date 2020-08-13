@@ -27,11 +27,3 @@ export const setSize = (size) => ({
     type: CartActionTypes.SELECT_SIZE,
     payload: size,
 });
-
-export const disableAddButton = () => ({
-    type: CartActionTypes.DISABLE_ADD_BUTTON,
-});
-
-export const enableAddButton = () => ({
-    type: CartActionTypes.ENABLE_ADD_BUTTON,
-});

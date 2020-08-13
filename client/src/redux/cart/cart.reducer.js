@@ -5,7 +5,6 @@ const INITIAL_STATE = {
     hidden: true,
     cartItems: [],
     size: '',
-    disabledButton: true,
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -44,16 +43,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 size: action.payload,
-            };
-        case CartActionTypes.DISABLE_ADD_BUTTON:
-            return {
-                ...state,
-                disabledButton: true,
-            };
-        case CartActionTypes.ENABLE_ADD_BUTTON:
-            return {
-                ...state,
-                disabledButton: false,
             };
         default:
             return state;
