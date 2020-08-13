@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { checkUserSession } from './redux/user/user.actions';
+import Contact from './pages/contact/contact.component';
 
 const App = ({ checkUserSession, currentUser }) => {
     // Firebase allows us to easily get the logged in user
@@ -34,6 +35,7 @@ const App = ({ checkUserSession, currentUser }) => {
             <Switch>
                 <Route exact path='/' component={HomePage} />
                 <Route path='/shop' component={Shop} />
+                <Route path='/contact' component={Contact} />
                 {/* This will redirect user to main page if they're logged in */}
                 <Route
                     exact
