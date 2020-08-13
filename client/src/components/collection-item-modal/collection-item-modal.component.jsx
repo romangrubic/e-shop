@@ -1,10 +1,12 @@
 import React from 'react';
 import './collection-item-modal.styles.scss';
 import { connect } from 'react-redux';
-import { addItem, disableAddButton } from '../../redux/cart/cart.actions';
+import { addItem } from '../../redux/cart/cart.actions';
+import { disableAddButton } from '../../redux/itemModal/itemModal.actions';
 import SizeChoices from '../size-choices/size-choices.component';
 import { createStructuredSelector } from 'reselect';
-import { selectSize, selectIsDisabled } from '../../redux/cart/cart.selector';
+import { selectSize } from '../../redux/cart/cart.selector';
+import { selectIsDisabled } from '../../redux/itemModal/itemModal.selector';
 
 const CollectionItemModal = ({
     open,
@@ -20,7 +22,10 @@ const CollectionItemModal = ({
     if (!open) return null;
     return (
         <>
-            <div onClick={onClose} className='overlay-styles' />
+            <div
+                onClick={() => (onClose(), disableAddButton())}
+                className='overlay-styles'
+            />
             <div className='modal-styles'>
                 <p className='close-icon' onClick={onClose}>
                     &#10006;
