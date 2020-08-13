@@ -32,7 +32,7 @@ const CartDropdown = ({ cartItems, history, dispatch }) => {
                 }}
                 inverted
             >
-                GO TO CHECKOUT
+                CHECKOUT
             </CustomButton>
         </div>
     );

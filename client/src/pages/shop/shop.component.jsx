@@ -4,6 +4,7 @@ import CollectionsOverviewContainer from '../../components/collections-overview/
 import { Route } from 'react-router-dom';
 import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 import CollectionContainer from '../collection/collection.container';
+import './shop.styles.scss';
 
 const Shop = ({ fetchCollectionsStart, match }) => {
     useEffect(() => {

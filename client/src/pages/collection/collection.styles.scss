@@ -1,24 +1,32 @@
 .collection-page {
-    display: flex;
-    flex-direction: column;
-
+    @media (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+    }
     .title {
         font-size: 28px;
-        margin: 20px auto 5px;
+        margin: 45px auto 25px;
         cursor: pointer;
+        @media (max-width: 800px) {
+            margin: 20px auto 25px;
+        }
     }
 
     .items {
-        padding: 20px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        margin: auto;
 
         & .collection-item {
             margin-bottom: 30px;
+            @media (max-width: 800px) {
+                margin-bottom: 0px;
+            }
         }
         @media (max-width: 800px) {
             grid-template-columns: 1fr 1fr;
             align-items: center;
+            grid-gap: 10px;
         }
     }
 }

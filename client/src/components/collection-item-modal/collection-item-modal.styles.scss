@@ -16,7 +16,7 @@
     background-color: #fff;
     padding: 0px 25px 25px;
     z-index: 1000;
-    min-width: 400px;
+    min-width: 350px;
     max-width: 500px;
     align-items: center;
     max-height: 850px;
@@ -57,7 +57,7 @@
     @media (max-width: 800px) {
         height: 90%;
         max-height: 750px;
-        width: 90%;
+        max-width: 90%;
         overflow: scroll;
     }
 }
