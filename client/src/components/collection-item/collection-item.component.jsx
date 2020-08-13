@@ -15,10 +15,10 @@ const CollectionItem = ({ item, category }) => {
             />
             <div className='collection-footer'>
                 <span className='name'>{name}</span>
-                <span className='price'>{price}</span>
+                <span className='price'>{price + '€'}</span>
             </div>
             <CustomButton onClick={() => setItemModalOpen(true)} inverted>
-                Click to view!
+                View item!
             </CustomButton>
             <CollectionItemModal
                 item={item}

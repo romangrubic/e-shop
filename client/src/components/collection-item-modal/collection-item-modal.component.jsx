@@ -23,7 +23,10 @@ const CollectionItemModal = ({
     return (
         <>
             <div
-                onClick={() => (onClose(), disableAddButton())}
+                onClick={() => {
+                    onClose();
+                    disableAddButton();
+                }}
                 className='overlay-styles'
             />
             <div className='modal-styles'>

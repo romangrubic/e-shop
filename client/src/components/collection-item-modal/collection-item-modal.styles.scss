@@ -19,6 +19,7 @@
     min-width: 400px;
     max-width: 500px;
     align-items: center;
+    max-height: 850px;
 
     .image {
         max-width: 500px;
@@ -53,38 +54,10 @@
             color: white;
         }
     }
-    //     .custom-button {
-    //         width: 80%;
-    //         opacity: 0.7;
-    //         position: absolute;
-    //         top: 255px;
-    //         display: none;
-    //     }
-
-    //     &:hover {
-    //         .image {
-    //             opacity: 0.8;
-    //         }
-    //         .custom-button {
-    //             display: flex;
-    //             opacity: 0.85;
-    //         }
-    //     }
-
-    //     .collection-footer {
-    //         width: 100%;
-    //         height: 5%;
-    //         display: flex;
-    //         justify-content: space-between;
-    //         font-size: 18px;
-
-    //         .name {
-    //             width: 90%;
-    //             margin-bottom: 15px;
-    //         }
-
-    //         .price {
-    //             width: 10%;
-    //         }
-    //     }
+    @media (max-width: 800px) {
+        height: 90%;
+        max-height: 750px;
+        width: 90%;
+        overflow: scroll;
+    }
 }

@@ -4,17 +4,21 @@
 
     .title {
         font-size: 28px;
-        margin: 0 auto 30px;
+        margin: 20px auto 5px;
         cursor: pointer;
     }
 
     .items {
+        padding: 20px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-gap: 10px;
 
         & .collection-item {
             margin-bottom: 30px;
+        }
+        @media (max-width: 800px) {
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
         }
     }
 }
