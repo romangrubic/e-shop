@@ -54,7 +54,7 @@ export const SignIn = ({ emailSignInStart, googleSignInStart }) => {
                         onClick={googleSignInStart}
                         isGoogleSignIn
                     >
-                        Sign in with Google
+                        Google sign-in
                     </CustomButton>
                 </div>
             </form>
