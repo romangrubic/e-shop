@@ -1,6 +1,5 @@
 // Lazy loading and suspense for performance boost!
 import React, { useEffect, lazy, Suspense } from 'react';
-
 import { Route, Switch, Redirect } from 'react-router-dom';
 // Pages
 import Header from './components/header/header.component';
@@ -17,7 +16,9 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { checkUserSession } from './redux/user/user.actions';
 
+// For lazy loading
 import Spinner from './components/spinner/spinner.component';
+import ErrorBoundary from './components/error-boundary/error-boundary.component';
 
 // React Lazy loading for pages. Dont forget to wrap them in Suspense component
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
@@ -40,24 +41,26 @@ const App = ({ checkUserSession, currentUser }) => {
             <GlobalStyle />
             <Header />
             <Switch>
-                <Suspense fallback={<Spinner />}>
-                    <Route exact path='/' component={HomePage} />
-                    <Route path='/shop' component={Shop} />
-                    <Route path='/contact' component={Contact} />
-                    {/* This will redirect user to main page if they're logged in */}
-                    <Route
-                        exact
-                        path='/signIn'
-                        render={() =>
-                            currentUser ? (
-                                <Redirect to='/' />
-                            ) : (
-                                <SignInAndSignUp />
-                            )
-                        }
-                    />
-                    <Route exact path='/checkout' component={Checkout} />
-                </Suspense>
+                <ErrorBoundary>
+                    <Suspense fallback={<Spinner />}>
+                        <Route exact path='/' component={HomePage} />
+                        <Route path='/shop' component={Shop} />
+                        <Route path='/contact' component={Contact} />
+                        {/* This will redirect user to main page if they're logged in */}
+                        <Route
+                            exact
+                            path='/signIn'
+                            render={() =>
+                                currentUser ? (
+                                    <Redirect to='/' />
+                                ) : (
+                                    <SignInAndSignUp />
+                                )
+                            }
+                        />
+                        <Route exact path='/checkout' component={Checkout} />
+                    </Suspense>
+                </ErrorBoundary>
             </Switch>
         </div>
     );
