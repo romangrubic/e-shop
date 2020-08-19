@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import { store, persistor } from './redux/store';
 // Redux persist
 import { PersistGate } from 'redux-persist/integration/react';
+// Service worker for PWA
+import * as serviceWorker from '../serviceWorker';
 
 ReactDOM.render(
     // Store is now accessible to every component once its passed with Provider
@@ -19,3 +21,5 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
+serviceWorker.register();
